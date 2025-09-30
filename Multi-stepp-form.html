@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Multi-Step Form</title>
+    <style>
+        *{
+            padding: 0px;
+            margin: 0px;
+            box-sizing: border-box;
+        }
+        body{
+            background: #fff;
+            font-family: "Roboto", sans-serif;
+            height: 100vh;
+            display: grid;
+            place-items: center;
+        }
+        .form{
+            width: 98%;
+            max-width: 400px;
+        }
+        .form .header{
+            text-align: center;
+            /* margin-bottom: 20px; */
+            padding: 20px;
+            display: grid;
+            gap: 5px;
+        }
+        .form .header p{
+            color: #555;
+        }
+        .form .body{
+            background: #f7f7f7;
+            /* padding: 20px; */
+            border-radius: 20px;
+            overflow: hidden;
+            height: 320px;
+            box-shadow: 0px 5px 5px 2px rgba(0,0,0,0.2);
+        }
+        .form .body .pagination{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 15px 20px;
+            gap: 15px;
+        }
+        .form .body .pagination .number{
+            height: 28px;
+            width: 28px;
+            text-align: center;
+            line-height: 28px;
+            border-radius: 50%;
+            background: #00aaee;
+            font-size: 15px;
+            /* border: 2px solid #aaa;
+            display: grid;
+            place-items: center; */
+            color: #fff;
+            /* font-weight: bold; */
+        }
+        .form .body .pagination .bar{
+            width: 50px;
+            height: 4px;
+            background: #00aaee;
+            border-radius: 5px;
+        }
+        .form .body .pagination .active ~ div{
+            background: #ddd;
+            color: #111;
+        }
+        .form .steps{
+            /* padding: 0px 20px;
+            height: 220px;
+            position: relative;
+            overflow: hidden; */
+            width: 400%;
+            display: flex;
+            transition: all 300ms ease-in-out;
+        }
+        .form .steps .step{
+            width: 98vh;
+            max-width: 400px;
+            padding: 5px 15px 15px;
+            overflow: hidden;
+            /* position: absolute;
+            top: 0px;
+            left: 0px;
+            opacity: 0;
+            transition: all 0.3s ease; */
+        }
+        .form .steps .step h4{
+            /* text-transform: uppercase;
+            color: #00aaee; */
+            margin-bottom: 5px;
+        }
+        .form .steps .step p{
+            font-size: 15px;
+            max-width: 90%;
+            color: #555;
+            /* margin-bottom: 15px; */
+        }
+       .form .steps .step .grid{
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-top: 20px;
+       }
+       .form .steps .step .grid .col label{
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 500;
+            font-size: 15px;
+            /* flex-direction: column;
+            gap: 8px; */
+       }
+       .form .steps .step .grid .col input{
+            /* display: block;
+            margin-bottom: 5px; */
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #bbb;
+            font-size: 15px;
+            border-radius: 8px;
+       }
+         .form .steps .step .grid .col .checkbox input{
+                display: none;
+                /* align-items: center;
+                gap: 8px; */
+         }
+         .form .steps .step .grid .col .checkbox label{
+            /* position: relative;
+            padding-left: 25px;
+            cursor: pointer;
+            user-select: none; */
+            width: 100%;
+            padding: 15px;
+            border: 1px solid #bbb;
+            border-radius: 5px;
+            margin: 0px;
+            cursor: pointer;
+         }
+         .form .steps .step .grid .col .checkbox input:checked + label{
+            /* content: "";
+            position: absolute;
+            left: 5px;
+            top: 50%;
+            transform: translateY(-50%);
+            height: 15px;
+            width: 15px;
+            border: 2px solid #bbb;
+            border-radius: 3px;
+            background: #fff; */
+            background: #00aaee;
+            color: #fff;
+
+         }
+         .form .steps .step .confirmation{
+            display: grid;
+            text-align: center;
+            place-items: center;
+            gap: 15px;
+         }
+         .form .steps .step .confirmation button{
+            background: #00aaee;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            outline: none;
+            font-size: 15px;
+            border-radius: 20px;
+            cursor: pointer;
+         }
+         .form .footer{
+            /* display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+            width: 98%;
+            max-width: 400px; */
+            padding: 10px 0px;
+            display: flex;
+            justify-content: space-between;
+        }
+        .form .footer button{
+            background: #fff;
+            /* color: #fff; */
+            padding: 5px 10px;
+            border: 1px solid #bbb;
+            outline: none;
+            font-size: 15px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+   <div class="form">
+    <div class="header">
+        <h2>Create a account</h2>
+        <p>Fill in the details below to create your account.</p>
+    </div>
+    <div class="body">
+        <div class="pagination">
+            <div class="number active">1</div>
+            <div class="bar"></div>
+            <div class="number">2</div>
+            <div class="bar"></div>
+            <div class="number">3</div>
+            <div class="bar"></div>
+            <div class="number">4</div>
+            <!-- <div class="bar"></div> -->
+        </div>
+        <div class="steps">
+             <div class="step">
+                <h4>Contact Details</h4>
+                <p>Enter your contact details below:</p>
+                <div class="grid">
+                    <div class="col">
+                        <label for="name">Name</label>
+                        <input type="text" id="name">
+                    </div>
+                    <div class="col">
+                        <label for="email">Email</label>
+                        <input type="email" id="email">
+                    </div>
+                    <div class="col">
+                        <label for="phone">Phone number</label>
+                        <input type="text" id="phone">
+                    </div>
+                    <div class="col">
+                        <label for="company">Company</label>
+                        <input type="text" id="company">
+                    </div>
+                </div>
+             </div>
+             <div class="step">
+                <h4>Areas of Interest</h4>
+                <p>Select your areas of interest:</p>
+                <div class="grid">
+                    <div class="col">
+                        <div class="checkbox">
+                            <input type="checkbox" id="Interest-finance">
+                            <label for="Interest-finance">Finance</label>
+                        </div>
+                    </div>
+                     <div class="col">
+                        <div class="checkbox">
+                            <input type="checkbox" id="Interest-maths">
+                            <label for="Interest-maths">Maths</label>
+                        </div>
+                    </div>
+                     <div class="col">
+                        <div class="checkbox">
+                            <input type="checkbox" id="Interest-programming">
+                            <label for="Interest-programming">Programming</label>
+                        </div>
+                    </div>
+                     <div class="col">
+                        <div class="checkbox">
+                            <input type="checkbox" id="Interest-music">
+                            <label for="Interest-music">Music</label>
+                        </div>
+                    </div>
+                </div>
+             </div>
+             <div class="step">
+                <h4>Secure your account</h4>
+                <p>Choose a strong password to secure your account:</p>
+                <div class="grid">
+                    <div class="col">
+                        <label for="password">Password</label>
+                        <input type="password" id="password">
+                    </div>
+                    <div class="col">
+                        <label for="retype-password">Retype Password</label>
+                        <input type="password" id="retype-password">
+                    </div> 
+             </div>
+        </div>
+        <div class="step">
+            <div class="confirmation">
+            <h2>Create My Account</h2>
+            <p>Congratulations! Your account has been successfully created!</p>
+            <div>
+                <button>Submit</button>
+            </div>
+            </div>
+        </div>
+    </div>
+   </div>
+   <div class="footer">
+    <button class="prev" disabled>Previous</button>
+    <button class="next">Next</button>
+   </div>
+   </div>
+</body>
+<script>
+    (function(){
+        let currentPage = 1;
+        const prevbtn = document.querySelector('.form .footer .prev');
+        const nextbtn = document.querySelector('.form .footer .next');
+        function movePage(){
+            prevbtn.disabled = false;
+            nextbtn.disabled = false;
+            if(currentPage === 1){
+                prevbtn.disabled = true;
+            } else if(currentPage === 4){
+                nextbtn.disabled = true;
+            }
+            document.querySelector('.form .pagination .active').classList.remove('active');
+            document.querySelectorAll('.form .pagination .number')[currentPage-1].classList.add('active');
+            const stepNode = document.querySelector('.form .steps .step');
+            const width = ((currentPage -1) * stepNode.offsetWidth*-1)+"px";
+            stepNode.parentNode.style.marginLeft = width;
+        }
+        prevbtn.addEventListener("click", function(){
+           currentPage -=1;
+           movePage();
+
+        });
+        nextbtn.addEventListener("click", function(){
+           currentPage +=1;
+           movePage();
+        });
+    })();
+</script>
+</html>
