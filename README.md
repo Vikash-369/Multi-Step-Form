@@ -26,10 +26,6 @@ It guides users through a smooth registration process divided into multiple stag
                 <li>CSS3 (Flexbox / Grid)</li>
                 <li>JavaScript (for step navigation)</li>
              </ul>
-             <h3>Author</h2>
-             <h4>Vikash Kumar</h3>
-             <p>Frontend Developer | Focused on JavaScript, UI Design & Web Games</p>
-             <a href="">[Your Portfolio or LinkedIn link]</a>
     </div>
 </body>
 </html>
